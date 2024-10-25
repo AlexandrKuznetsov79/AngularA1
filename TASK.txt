@@ -1,0 +1,75 @@
+Нужны доработки:
+
+1) Создай папку components и перенеси в нее свои компоненты.
+2) Должна быть видна только одна форма или регистрации или логин И осуществлялся переход между ними нажатием клавиши
+3) Создай папку models и в ней файл auth.models.ts в котором для каждого компонента определи интерфейсы
+ export interface IRegUser { 
+   login?:string;
+   password?:string;
+} 
+
+4) в компонентах (на примере регистрации) 
+вместо 
+   login?:string;
+   password?:string;
+   
+ Перенеси их в один обьект Например regUser у которго будет тип (интерфес) который определишь в модели
+
+userData:IRegUser = { login:'', password:''}
+
+соответсвенно в [(ngModel)]=userData.login // Впрочем можешь это не делать т.к. [(ngModel)] мы использовать не будем
+//------ это мелкие нюансы Далее след задание -------- ///
+
+1) Задание - В качестве input тебе нужно использовать компонеты из Ангуляр Материал
+
+для этого нужно (Вначале ознакомиться с тем что это https://material.angular.io/ )установить Angular Material (https://material.angular.io/guide/getting-started) в проект
+
+Далее в модуль (app.module.ts) Импортировать нужные модули из материала (инпут и баттон) (пример для инпута:
+  Добавляем экспорт import {MatInputModule} from '@angular/material/input') 
+ и добавляем в импорт  
+imports: [
+  ....
+MatInputModule,
+  ....
+]
+
+Заменить свои инпуты и баттоны на те.
+
+Тут все есть:
+https://material.angular.io/components/input/examples
+2) Задание Установи библиотеку rxjs (https://rxjs.dev/guide/overview) она понадобится в 3 задании
+3) Задание -
+ Вместо  [(ngModel)] будем использовать формКонтрол https://v17.angular.io/api/forms/FormControl
+ 
+ Что нужно сделать 
+ Добавить форм контролы в свои компоненты 
+ в ts 
+ import { FormControl, FormGroup, Validators } from '@angular/forms';
+ .....
+ public form: FormGroup; Создаешь форм групп
+ ......
+   constructor(
+  ) {
+    this.form = new FormGroup({
+      login: new FormControl<string | null>(''),
+	  password: new FormControl<string | null>(''),
+    });
+  }
+  
+  В методе подписываешься на изменение этих контролов
+  ngOnInit(): void {
+  Пример для одного:
+    this.form.controls['login'].valueChanges
+      .pipe(
+        tap((login) => (console.log(login))),
+      )
+      .subscribe();
+	  
+В файле html добавляем formControlName="login"
+
+<mat-form-field class="example-form-field">
+  <mat-label>Clearable input</mat-label>
+  <input matInput type="text" formControlName="login">
+</mat-form-field>
+
+Пока хватит! Если что то не получается пиши

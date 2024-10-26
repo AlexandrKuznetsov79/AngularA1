@@ -4,21 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { WelcomeMenuComponent } from './welcome-menu/welcome-menu.component';
-import { RegistrationComponent } from './registration/registration.component';
+import { WelcomeMenuComponent } from './components/welcome-menu/welcome-menu.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    WelcomeMenuComponent,
-    RegistrationComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule
-  ],
+  declarations: [AppComponent, WelcomeMenuComponent, RegistrationComponent],
+  imports: [BrowserModule, FormsModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

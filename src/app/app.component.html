@@ -18,5 +18,7 @@
         formControlName="password"
       ></textarea>
     </mat-form-field>
+
+    <button [disabled]="!formLogin.valid">Тест</button>
   </div>
 </form>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -10,16 +10,29 @@ export class AppComponent implements OnInit {
   title = 'proj1';
 
   formLogin: FormGroup;
+
+  testValidator = (control: FormControl) => {
+    console.log(control);
+    const val: string = control.value;
+    if (val.length < 6) {
+      // return false; //{ password: 'СЛИШКОМ КОРОТКИЙ ПАРОЛЬ' };
+    }
+    return null;
+  };
+
   constructor() {
     this.formLogin = new FormGroup({
-      login: new FormControl<string>(''),
-      password: new FormControl<string>(''),
+      login: new FormControl<string>('', [Validators.required]),
+      password: new FormControl<string>('', [
+        Validators.required,
+        this.testValidator,
+      ]),
     });
   }
 
   ngOnInit(): void {
     this.formLogin.valueChanges.subscribe((val) => {
-      console.log(val);
+      console.log(val, this.formLogin.valid);
     });
   }
 }

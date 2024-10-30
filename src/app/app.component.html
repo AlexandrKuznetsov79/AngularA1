@@ -1,4 +1,7 @@
 <div class="mainPage">
-     <app-welcome-menu></app-welcome-menu> 
-     <app-registration></app-registration>
+  <app-welcome-menu
+    *ngIf="isShowLogIn"
+    (showRegistrationEvent)="changeView()"
+  ></app-welcome-menu>
+  <app-registration *ngIf="!isShowLogIn"></app-registration>
 </div>

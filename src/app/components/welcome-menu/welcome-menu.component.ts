@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { IRegUser } from 'src/app/models/auth.model';
 
 @Component({
@@ -9,7 +9,12 @@ import { IRegUser } from 'src/app/models/auth.model';
 export class WelcomeMenuComponent {
   userData: IRegUser = { login: '', password: '' };
 
+  @Output() showRegistrationEvent = new EventEmitter();
   verification() {
     /*Тут будет происходить проверка введенных данных*/
+  }
+
+  showRegistration() {
+    this.showRegistrationEvent.emit();
   }
 }
